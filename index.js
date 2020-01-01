@@ -7,12 +7,14 @@ buttonsArray.forEach(function(boton) {
     var buttonInnerHTML = this.innerHTML;
 
     makesound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
   });
 });
 
 //se activa el switch con las teclas. El parametro es la propiedad key del objeto evento (detecta la tecla)
 document.addEventListener("keydown", function(event) {
   makesound(event.key);
+  buttonAnimation(event.key);
 });
 
 //funcion con switch que une la letra con el sonido
@@ -56,4 +58,16 @@ function makesound(key) {
     default:
       console.log(key);
   }
+}
+
+/*agregar animaciones con un timeout para resetear*/
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
